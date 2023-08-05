@@ -2,6 +2,7 @@ import disnake
 from disnake.ext import commands
 from moderation import Moderation
 from normal import Normal
+from keep_alive import keep_alive
 
 intents = disnake.Intents.all()
 bot = commands.InteractionBot(intents=intents)
