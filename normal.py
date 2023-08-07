@@ -8,13 +8,13 @@ class Normal(commands.Cog):
         self.bot = bot
         
     
-    @commands.slash_command(description="Check the bot's ping")
+    @commands.slash_command(name='ping', description="Check the bot's ping")
     async def ping(self, inter: disnake.ApplicationCommandInteraction) -> None:
         """Check the bot's latency"""
         latency = self.bot.latency
         await inter.send(f"Pong! Latency: {round(latency * 1000)}ms")
         
-    @commands.slash_command(description='Lists all the things that this bot can do')
+    @commands.slash_command(name='help', description='Lists all the things that this bot can do')
     async def help(self, inter: disnake.ApplicationCommandInteraction) -> None:
         """Help Command"""
         embed = disnake.Embed(
@@ -25,6 +25,11 @@ class Normal(commands.Cog):
         embed.set_footer(text='-----')
         embed.add_field(name='Ping', value='Check the bots Latency', inline=True)
         embed.add_field(name='Ban', value="Ban's a particuler User", inline=True)
+        embed.add_field(name= '\u200b', value= '\u200b')
+        embed.add_field(name='Timeout', value="Timeout a particuler User", inline=True)
+        embed.add_field(name='Clear', value="Clear messages", inline=True)
+        embed.add_field(name= '\u200b', value= '\u200b')
+        embed.add_field(name='Kick', value="Kick a particuler User", inline=True)
         
         await inter.response.send_message(embed=embed)
         
