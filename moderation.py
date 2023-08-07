@@ -34,10 +34,11 @@ class Moderation(commands.Cog):
     
     @commands.has_permissions(kick_members=True)
     @commands.slash_command(name="timeout", description='Timeout a member')
-    async def timeout_command(self, inter: disnake.ApplicationCommandInteraction, member: disnake.Member, duration: int, reason: str):
+    async def timeout(self, inter: disnake.ApplicationCommandInteraction, member: disnake.Member, duration: int, reason: str):
         """
         Timeouts a user for a specified duration.
         """
         await member.timeout(duration=duration, reason=reason)
         await inter.response.defer()
         await inter.send(f"Successfully timed out {member.name} for {duration} seconds.")
+
