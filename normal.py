@@ -6,31 +6,38 @@ from disnake.ext import commands
 class Normal(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-        
-    
-    @commands.slash_command(name='ping', description="Check the bot's ping")
-    async def ping(self, inter: disnake.ApplicationCommandInteraction) -> None:
-        """Check the bot's latency"""
-        latency = self.bot.latency
-        await inter.send(f"Pong! Latency: {round(latency * 1000)}ms")
-        
+
+
     @commands.slash_command(name='help', description='Lists all the things that this bot can do')
-    async def help(self, inter: disnake.ApplicationCommandInteraction) -> None:
+    async def help(self, inter: disnake.ApplicationCommandInteraction):
         """Help Command"""
         embed = disnake.Embed(
             title='Help',
-            description="WIP",
-            color= disnake.Colour.green()       
+            description='''**Hello, This is a discord bot made using disnake and
+            is open source. 
+            Our bot is open for contribution and you can use it yourself easily. 
+            It is made to have slash commands and more will be added in the future**.
+            Check it out: https://github.com/AkhilProto/Akhils-Servant-Discord-Bot''',
+            color= disnake.Colour.blue()       
         )
-        embed.set_footer(text='-----')
-        embed.add_field(name='Ping', value='Check the bots Latency', inline=True)
-        embed.add_field(name='Ban', value="Ban's a particuler User", inline=True)
-        embed.add_field(name= '\u200b', value= '\u200b')
-        embed.add_field(name='Timeout', value="Timeout a particuler User", inline=True)
-        embed.add_field(name='Clear', value="Clear messages", inline=True)
-        embed.add_field(name= '\u200b', value= '\u200b')
-        embed.add_field(name='Kick', value="Kick a particuler User", inline=True)
-        
         await inter.response.send_message(embed=embed)
+      
+    @commands.slash_command(name='ping', description="Check the bot's ping")
+    async def ping(self, inter: disnake.ApplicationCommandInteraction):
+        """Check the bot's latency"""
+        latency = self.bot.latency
+        await inter.send(f"Pong! Latency: {round(latency * 1000)}ms")   
         
-    
+    @commands.slash_command(name="avatar", description="Check someones avatar.")
+    async def avatar(self, inter: disnake.ApplicationCommandInteraction, member: disnake.Member = None):
+        """Check someones avatar"""
+        embed = disnake.Embed(
+            title='Here is what I found:',
+            color= disnake.Colour.darker_grey(),
+        )
+        if member == None:
+            embed.set_image(inter.author.avatar)
+        else:
+            embed.set_image(member.avatar)
+
+        await inter.send(embed=embed)
