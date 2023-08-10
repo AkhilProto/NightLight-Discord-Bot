@@ -13,15 +13,39 @@ class Normal(commands.Cog):
         """Help Command"""
         embed = disnake.Embed(
             title='Help',
-            description='''**Hello, This is a discord bot made using disnake and
-            is open source. 
-            Our bot is open for contribution and you can use it yourself easily. 
-            It is made to have slash commands and more will be added in the future**.
-            Check it out: https://github.com/AkhilProto/Akhils-Servant-Discord-Bot''',
+            description='''What do you need?''',
             color= disnake.Colour.blue()       
         )
-        await inter.response.send_message(embed=embed)
+        components= [disnake.ui.Button(label='Description', style=disnake.ButtonStyle.primary, custom_id="1")
+                    ,disnake.ui.Button(label='Contribution', style=disnake.ButtonStyle.primary, custom_id="2")]
+        
+        await inter.response.send_message(embed=embed, components=components)
       
+      
+    @commands.Cog.listener("on_button_click")
+    async def help_listener(self, inter: disnake.MessageInteraction):
+        '''Listener for buttons'''
+        if inter.component.custom_id not in ["1", "2"]:
+            return
+        
+        if inter.component.custom_id == "1":
+            embed = disnake.Embed(
+                title='Description:',
+                color=disnake.Colour.gold()
+            )
+            embed.add_field(name="Hey, Hope you are doing well. This is a bot made with disnake and We are trying to create a cool bot which can do most of the moderation and normal stuff. It only uses slash commands and listening commands.", value='\u200b')
+            await inter.response.send_message(embed=embed)
+            
+        elif inter.component.custom_id == "2":
+            embed = disnake.Embed(
+                title="Contribution:",
+                color=disnake.Colour.gold()
+            )
+            embed.add_field(name="Our bot is open source and you can use the code to make your own bots or contribute which is really appreciated. More slash commands will be added in the future. Check it out: https://github.com/AkhilProto/Akhils-Servant-Discord-Bot", value='\u200b')
+            await inter.response.send_message(embed=embed)
+            
+            
+
     @commands.slash_command(name='ping', description="Check the bot's ping")
     async def ping(self, inter: disnake.ApplicationCommandInteraction):
         """Check the bot's latency"""
