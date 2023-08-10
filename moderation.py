@@ -42,3 +42,35 @@ class Moderation(commands.Cog):
         await inter.response.defer()
         await inter.send(f"Successfully timed out {member.name} for {duration} seconds.")
 
+    @commands.has_permissions(manage_channels=True)
+    @commands.slash_command(name="create_text_channel", description='Create a text channel.')
+    async def create_text_channel(self, inter: disnake.ApplicationCommandInteraction, name: str):
+        """
+        Create a text channel
+        """
+        await inter.guild.create_text_channel(name=name)
+        await inter.response.defer()
+        await inter.send(f"Successfully created a text channel named **{name}**.")
+        
+    @commands.has_permissions(manage_channels=True)
+    @commands.slash_command(name="create_voice_channel", description='Create a voice channel.')
+    async def create_voice_channel(self, inter: disnake.ApplicationCommandInteraction, name: str):
+        """
+        Create a voice channel
+        """
+        await inter.guild.create_voice_channel(name=name)
+        await inter.response.defer()
+        await inter.send(f"Successfully created a voice channel named **{name}**.")
+    
+    @commands.has_permissions(manage_channels=True)
+    @commands.slash_command(name="create_stage_channel", description='Create a stage channel.')
+    async def create_stage_channel(self, inter: disnake.ApplicationCommandInteraction, name: str):
+        """
+        Create a stage channel
+        """
+        await inter.guild.create_stage_channel(name=name)
+        await inter.response.defer()
+        await inter.send(f"Successfully created a stage channel named **{name}**.")
+       
+     
+    
