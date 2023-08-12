@@ -43,7 +43,7 @@ class Normal(commands.Cog):
                 title="Contribution:",
                 color=disnake.Colour.gold()
             )
-            embed.add_field(name="Our bot is open source and you can use the code to make your own bots or contribute which is really appreciated. More slash commands will be added in the future. Check it out: https://github.com/AkhilProto/Akhils-Servant-Discord-Bot", value='\u200b')
+            embed.add_field(name="Our bot is open source and you can use the code to make your own bots or contribute which is really appreciated. More slash commands will be added in the future. Check it out: https://github.com/AkhilProto/NightLight-Discord-Bot", value='\u200b')
             await inter.response.send_message(embed=embed)
             
             
