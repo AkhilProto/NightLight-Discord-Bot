@@ -13,7 +13,9 @@ from exception_handler import Error_handler
 import os 
 token = os.environ['token']
 
-WELCOME_CHANNEL = "📫︱join―leave"
+WELCOME_CHANNEL = {Channel name}
+VERIFICATION_CHANNEL = {Channel name}
+BOT-COMMANDS_CHANNEL = {Channel name}
 intents = disnake.Intents.all()
 bot = commands.InteractionBot(intents=intents)
 
@@ -25,14 +27,16 @@ async def on_ready():
     bot.add_cog(Error_handler(bot))
     
     print(f"Bot started with the ID: {bot.user}")
-    bot.loop.create_task(send_message_in_private_channel())
+    
 
 # Automatic running events
 @bot.event
 async def on_member_join(member):
     welcome_channel = discord.utils.get(member.guild.channels, name=WELCOME_CHANNEL)
-    await welcome_channel.send(f"Welcome {member.mention}! Please read our rules and verify yourself at <#1130116826114826242> to access the server. Call me with a simple command ?ahelp in <#1130116826114826246> channel. Have a great time!!")
-
+    verification_channel = discord.utils.get(member.guild.channels, name=VERIFICATION_CHANNEL)
+    bot-commands_channel = discord.utils.get(member.guild.channels, name=BOT-COMMANDS_CHANNEL)
+    await welcome_channel.send(f"Welcome {member.mention}! Please read our rules and verify yourself at <#{verification_channel}> to access the server. Call me with a simple command /help in <#{bot-commands_channel}> channel. Have a great time!!")
+    
 
 if __name__ == "__main__":
     bot.run(token)
