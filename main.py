@@ -1,18 +1,22 @@
+# Import modules
 import disnake
 from disnake.ext import commands
 import asyncio 
 import time
 import discord
+
+# Import functions from files
 from moderation import Moderation
 from normal import Normal
 from exception_handler import Error_handler
-from keep_alive import keep_alive
+
 import os 
 token = os.environ['token']
+
 WELCOME_CHANNEL = "📫︱join―leave"
 intents = disnake.Intents.all()
 bot = commands.InteractionBot(intents=intents)
-keep_alive()
+
 
 @bot.event
 async def on_ready():
@@ -31,14 +35,14 @@ async def on_member_join(member):
 
 async def send_message_in_private_channel():
     await bot.wait_until_ready()
-    private_channel_id = 1131217771225681920  
+    private_channel_id = 123467890123456789    # Change with your Reporti  
     
     while not bot.is_closed():
         private_channel = bot.get_channel(private_channel_id)
         latency = bot.latency
         now = time.localtime()
         await private_channel.send(f"Reporting Roger!! The time is {now.tm_hour}:{now.tm_min}:{now.tm_sec} now. Latency: {round(latency * 1000)}ms")
-        await asyncio.sleep(3600)# Sleep for 1 hour (3600 seconds)
+        await asyncio.sleep(86400)# Sleep for 24 hours (86400 seconds)
 
 if __name__ == "__main__":
     bot.run(token)
