@@ -1,4 +1,5 @@
-![Untitled design(1)](https://github.com/AkhilProto/Akhils-Servant-Discord-Bot/assets/102037087/17e1ba21-4365-4441-b6f9-5ab0624b369a)
+![Logo](https://github.com/AkhilProto/Akhils-Servant-Discord-Bot/assets/102037087/63725963-bf13-4ac9-b604-90a5ee004282)
+
 
 # NightLight
 <hr>
