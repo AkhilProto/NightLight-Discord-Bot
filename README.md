@@ -10,5 +10,5 @@
 # Aim
 - We are hoping to make a cool bot which you can use on your projects or contribute or make a new better bot yourself by using our bot's source code.
 
-`Cheers`
+
 
