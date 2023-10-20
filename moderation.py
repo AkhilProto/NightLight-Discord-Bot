@@ -1,5 +1,6 @@
 #Will include the moderation commands like ban, kick, timeout etc.
 import disnake
+import asyncio
 from disnake.ext import commands
 
 class Moderation(commands.Cog):
@@ -71,6 +72,26 @@ class Moderation(commands.Cog):
         await inter.guild.create_stage_channel(name=name)
         await inter.response.defer()
         await inter.send(f"Successfully created a stage channel named **{name}**.")
+
+    @commands.has_permissions(manage_roles=True)
+    @commands.slash_command(name="mute", description="Mute a member for a duration.")
+    async def mute(self, inter: disnake.ApplicationCommandInteraction, member: disnake.Member, duration: int, reason: str = "No reason provided"):
+        """
+        Mute a user for a specified duration.
+        """
+        mute_role = disnake.utils.get(inter.guild.roles, name="Muted")
+        if not mute_role:
+            mute_role = await inter.guild.create_role(name="Muted", reason="Mute role needed.")
+            # Add overwrites to prevent the muted role from sending messages or adding reactions.
+            for channel in inter.guild.channels:
+                await channel.set_permissions(mute_role, send_messages=False, add_reactions=False)
+        
+        await member.add_roles(mute_role, reason=reason)
+        await inter.send(f"Muted {member.name} for {duration} seconds due to: {reason}")
+        
+        await asyncio.sleep(duration)  # make sure to import asyncio
+        await member.remove_roles(mute_role, reason="Mute duration ended.")
+
        
      
     
